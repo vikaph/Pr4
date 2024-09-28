@@ -1,14 +1,35 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 fun main() {
-    val name = "Kotlin"
-    //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-    // to see how IntelliJ IDEA suggests fixing it.
-    println("Hello, " + name + "!")
+    println("Введите два числа и операцию (например: 5.0 3.0 +):")
+    val x1 = readLine()
+    if (x1 != null) {
+        val parts = x1.split(" ")
+        if (parts.size == 3) {
+            val number1 = parts[0].toDoubleOrNull()
+            val number2 = parts[1].toDoubleOrNull()
+            val operation = parts[2]
 
-    for (i in 1..5) {
-        //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-        // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-        println("i = $i")
+            if (number1 != null && number2 != null) {
+                val result = when (operation) {
+                    "+" -> number1 + number2
+                    "-" -> number1 - number2
+                    "*" -> number1 * number2
+                    "/" -> {
+                        if (number2 != 0.0) {
+                            number1 / number2
+                        } else {
+                            "Ошибка: деление на ноль"
+                        }
+                    }
+                    else -> "Ошибка: неверная операция"
+                }
+                println("Результат: $result")
+            } else {
+                println("Ошибка: неверный ввод чисел")
+            }
+        } else {
+            println("Ошибка: введите два числа и операцию, разделенные пробелами")
+        }
+    } else {
+        println("Ошибка: пустой ввод")
     }
 }
